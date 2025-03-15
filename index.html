@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+  <body>
+    <script>
+
+        SpeechRecognition=webkitSpeechRecognition||SpeechRecognition;
+        const recoginition=new SpeechRecognition();
+        var i=0;
+
+    function start(){
+        
+        i=0;
+        document.getElementById("text2").innerText="HITSUDAN MODE:入力中";
+        
+        recoginition.continuous=true;
+
+        recoginition.onresult=(event)=>{
+            //document.write(event.results[i][0].transcript);
+            document.getElementById("text1").innerText=event.results[i][0].transcript;
+            i++;
+            //alert(event.results);
+        }
+        recoginition.start();
+    }
+
+    function stop(){
+        document.getElementById("text2").innerText="HITSUDAN MODE:待機中";
+        recoginition.stop();
+    }
+
+
+</script>
+<font size="5"><center><dvi id="text2">HITSUDAN MODE:待機中</dvi></center></font>
+<div align="right">
+<input type="button" value="開始" onclick="start();" style="font-size:30px; width:100px;height:50px">
+<input type="button" value="終了" onclick="stop();" style="font-size:30px; width:100px;height:50px">
+
+</div>
+<br/>
+<font size="6"><dvi id="text1">会話内容が表示されます。</dvi></font>
+  </body>
+</html>
